@@ -1,0 +1,650 @@
+# Evidence for the report in this folder: every factual statement (claim) with verbatim quotes
+# from its sources. Source IDs (S<n>) are resolved in sources.csv; the report numbers them [n].
+claims:
+- id: C1
+  section: summary
+  statement: LastPass TIME and Delphos Labs identified and disrupted a multi-stage malware delivery campaign that
+    impersonated at least 40 companies on GitHub; LastPass tracks the infostealer as Rapuncel.
+  evidence:
+  - source: S1
+    quote: identified and disrupted a multi-stage malware delivery campaign impersonating at least 40 companies
+      on GitHub
+  - source: S1
+    quote: LastPass is internally tracking the infostealer as Rapuncel.
+  - source: S2
+    quote: LastPass and Delphos Labs uncovered the campaign, which they report impersonates the password manager
+      brand and at least 39 other companies.
+  - source: S5
+    quote: Investigators found that the same infrastructure was being used to impersonate at least 40 companies.
+- id: C2
+  section: summary
+  statement: 'The campaign was brand impersonation only: no LastPass system, service or customer vault was compromised,
+    and GitHub is not a LastPass distribution channel.'
+  evidence:
+  - source: S1
+    quote: No LastPass system, service, or customer vault was involved or compromised.
+  - source: S1
+    quote: Official LastPass Authenticator is available through lastpass.com and the official app stores. GitHub
+      is not a LastPass distribution channel.
+  - source: S5
+    quote: The company stressed that its own systems, services, and customer vaults were not compromised, and that
+      GitHub is not an official distribution channel for LastPass Authenticator.
+- id: C3
+  section: timeline
+  date: '2026-08-13'
+  statement: LastPass TIME identified a fraudulent GitHub organisation impersonating LastPass Authenticator.
+  evidence:
+  - source: S1
+    quote: On August 13, 2026, the LastPass TIME Team identified a fraudulent GitHub organization impersonating
+      LastPass Authenticator
+  - source: S4
+    quote: LastPass’s Threat Intelligence, Mitigation, and Escalation team spotted the fake GitHub organization
+      on August 13, 2026.
+  - source: S5
+    quote: LastPass first detected the operation on August 13, 2026, after identifying a fraudulent GitHub organization
+      at github[.]com/LastPass-Authenticator.
+- id: C4
+  section: timeline
+  date: '2026-08-19'
+  statement: Delphos reported Alinubx.sys to Microsoft (MSRC); MSRC did not classify it as a vulnerability because
+    the driver is not a Microsoft component and redirected the report to the driver submission (blocklist) channel.
+  evidence:
+  - source: S1
+    quote: Delphos reported Alinubx.sys to Microsoft through the MSRC Researcher Portal on August 19, 2026. MSRC
+      responded that the behavior does not meet its definition of a security vulnerability, since the driver is
+      not a Microsoft-owned component
+  - source: S4
+    quote: Delphos flagged the sample to Microsoft on August 19.
+- id: C5
+  section: timeline
+  date: '2026-08-20'
+  statement: Neither Alinubx.sys nor the original CcProtect.sys was on Microsoft's vulnerable driver blocklist,
+    and Alinubx.sys had 0/72 VirusTotal detections.
+  evidence:
+  - source: S1
+    quote: Delphos checked 18 raw driver files from public BYOVD repositories, plus CcProtect.sys and Alinubx.sys,
+      against the Microsoft DriverPolicy_Enforced.xml blocklist downloaded on August 20, 2026. There were 0 of 20
+      SHA256 matches
+  - source: S1
+    quote: It scored 0 out of 72 on VirusTotal as of August 20, 2026, unchanged since July 2025.
+  - source: S6
+    quote: found neither the renamed driver nor the known original on it
+- id: C6
+  section: timeline
+  date: '2026-09-10'
+  statement: The traffic-director endpoint was still live and its content had changed between 27 August and 10 September,
+    showing active maintenance of the campaign.
+  evidence:
+  - source: S1
+    quote: The endpoint was confirmed live and serving a JavaScript redirect on September 10, 2026, and its content
+      had changed between August 27 and September 10, confirming active ongoing maintenance.
+  - source: S4
+    quote: The endpoint also changed between August 27 and September 10, showing that the attackers were still actively
+      maintaining the campaign.
+- id: C7
+  section: timeline
+  date: '2026-09-17'
+  statement: LastPass and Delphos Labs published their joint report; at publication Alinubx.sys was still not on
+    the Microsoft vulnerable driver blocklist.
+  evidence:
+  - source: S1
+    quote: At publication, Alinubx.sys was not present in the Microsoft vulnerable driver blocklist.
+  - source: S3
+    quote: At the time of publication, the reported file Alinubx.sys is not yet on the blocklist.
+- id: C8
+  section: distribution
+  statement: Victims searching for terms like 'LastPass Authenticator download' found an SEO-optimised fake GitHub
+    organisation page (github.com/LastPass-Authenticator) near the top of search results.
+  attack:
+  - T1608.006
+  evidence:
+  - source: S1
+    quote: A user searching for "LastPass Authenticator download" or similar terms encounters a fraudulent GitHub
+      organization page (github[.]com/LastPass-Authenticator) near the top of search results. The page is deliberately
+      SEO-optimized and appeared to rank well.
+  - source: S6
+    quote: The lure is a fake GitHub page (github.com/LastPass-Authenticator) that ranks in search results
+- id: C9
+  section: distribution
+  statement: A second, near-identical fake GitHub page advertised a 'macOS LastPass' product and was taken down
+    before it could be analysed.
+  evidence:
+  - source: S1
+    quote: There was also a second similar fake GitHub page (github[.]com/LastPass-S) which used nearly identical
+      SEO-stuffed language about a "macOS LastPass" product.
+  - source: S6
+    quote: a near-identical second fake page for a "macOS LastPass" product was taken down
+- id: C10
+  section: distribution
+  statement: The lure led to a GitHub Pages download portal showing fabricated trust badges such as 'VirusTotal
+    Approved' and 'Secure Archive'.
+  evidence:
+  - source: S1
+    quote: Clicking the button takes the victim to a GitHub Pages site (lastpass-authenticator[.]github[.]io) that
+      displays a convincing download interface. The page shows fabricated trust signals (i.e., "Authorized Access,"
+      "VirusTotal Approved," and "Secure Archive" badges)
+  - source: S4
+    quote: The download page also displayed fake trust badges, including “VirusTotal Approved.”
+  - source: S3
+    quote: The download leads to a GitHub Pages site, where signals like green tags and slogans such as “secure”,
+      “Verified Access”, and “Secure Connection” suggest trustworthiness to the victims.
+- id: C11
+  section: distribution
+  statement: Victims were routed through two further GitHub Pages accounts whose custom 404.html pages silently
+    forwarded them via JavaScript, abusing GitHub Pages error handling as a covert redirector.
+  evidence:
+  - source: S1
+    quote: the page silently routes the victim through two additional observed GitHub Pages accounts (i.e., edgarcostartqd[.]github[.]io
+      and dallikilic54[.]github[.]io) that act as hidden waypoints.
+  - source: S1
+    quote: Each one uses a custom 404.html file containing JavaScript that captures the URL path and silently forwards
+      the victim to the next stage.
+  - source: S4
+    quote: they were sent through two other GitHub Pages accounts that looked like broken 404 pages but secretly
+      used JavaScript to redirect them to the next step.
+  - source: S3
+    quote: use modified 404.html files to abuse GitHub Pages’ error handling as a hidden redirect.
+- id: C12
+  section: distribution
+  statement: The payload arrived as ZIP archives of 148 MB and 127.9 MB, inflated with junk DLLs so that size-limited
+    scanners skip them.
+  attack:
+  - T1027.001
+  evidence:
+  - source: S1
+    quote: 'The large file size is intentional: most automated security scanning tools have size limits and will
+      skip files this large'
+  - source: S1
+    quote: Two large files (TitanStorage.dll and ProManager.dll) are pure junk and are included only to inflate
+      the archive size further.
+  - source: S2
+    quote: victims receive ZIP archives with their size inflated to up to 148MB to evade security scans.
+- id: C13
+  section: infection_chain
+  statement: The 'installer' is Microsoft's renamed vsdbg.exe debugger, which side-loads the malicious vsdbg.dll
+    from the same folder when the victim runs it.
+  attack:
+  - T1204.002
+  - T1574.001
+  - T1036.005
+  evidence:
+  - source: S1
+    quote: The victim runs what looks like a LastPass installer; however, it is actually Microsoft's own debugging
+      tool (vsdbg.exe) renamed. When Windows loads this program, it automatically loads a companion file (vsdbg.dll)
+      from the same folder.
+  - source: S2
+    quote: The installer inside the archives is a copy of the legitimate Microsoft Visual Studio CoreCLR Debugger,
+      'vsdbg.exe,' renamed and configured to sideload a malicious DLL (vsdbg.dll).
+  - source: S5
+    quote: The malware abused a legitimate Microsoft debugging executable, vsdbg.exe, to load a malicious DLL through
+      DLL side-loading.
+- id: C14
+  section: infection_chain
+  statement: The loader tries three elevation methods (UAC bypass) and then runs as SYSTEM.
+  attack:
+  - T1548.002
+  evidence:
+  - source: S1
+    quote: The malware attempts three different methods to obtain administrator-level access, exploiting built-in
+      Windows features that allow programs to request elevated permissions. Once it succeeds, it runs as SYSTEM
+  - source: S6
+    quote: The loader then tries three ways to gain administrator rights, reaches SYSTEM
+- id: C15
+  section: infection_chain
+  statement: The loader matches the Cruciferra PUROSANGUE feature set described by eSentire, which includes process
+    hollowing into ServiceModelReg.exe; Delphos lists process hollowing as observed.
+  attack:
+  - T1055.012
+  evidence:
+  - source: S1
+    quote: eSentire describes a Cruciferra package called PUROSANGUE that produces a NativeAOT side-loaded DLL with
+      EDR/AV killing, COM Elevation Moniker UAC bypass, process hollowing into ServiceModelReg.exe, and 145 default
+      AV/EDR process targets. Our loader contains the decrypted string C:\ExploitTests\purosangue.tx and matches
+      every one of those features.
+  - source: S1
+    quote: '| T1055.012 | Process Injection: Process Hollowing |'
+- id: C16
+  section: infection_chain
+  statement: The kernel driver is dropped as nvfsflt64.sys and registered as the service NvFsFilter, masquerading
+    as an NVIDIA File System Filter Driver.
+  attack:
+  - T1543.003
+  - T1036.005
+  evidence:
+  - source: S1
+    quote: dropped to disk as nvfsflt64.sys under the service name NvFsFilter, disguised as an NVIDIA File System
+      Filter Driver.
+  - source: S2
+    quote: The kernel driver is disguised as an NVIDIA component named 'nvfsflt64.sys' and registers as the NvFsFilter
+      service.
+- id: C17
+  section: infection_chain
+  statement: The malware persists as an auto-start Windows service and loops continuously, re-killing restarted
+    security products and re-running the stealer on every boot.
+  attack:
+  - T1543.003
+  evidence:
+  - source: S1
+    quote: 'The malware installs itself as a Windows service that starts automatically every time the computer boots.
+      It then loops continuously: checking for security products, killing any that have restarted, and re-running
+      the stealer.'
+  - source: S2
+    quote: Rapuncel persists across reboots via a Windows service, so any security tools that reactivate are killed
+      again before the infostealer launches.
+- id: C18
+  section: capabilities
+  statement: 'Alinubx.sys terminates a hardcoded list of 145 AV/EDR processes from kernel mode: the loader sends
+    IOCTL 0x222024 with process IDs to \\.\Alinubx and the driver kills them with ZwTerminateProcess.'
+  attack:
+  - T1685
+  evidence:
+  - source: S1
+    quote: The loader sends IOCTL 0x222024 with target process IDs. The driver resolves each target process with
+      PsLookupProcessByProcessId, opens it with ObOpenObjectByPointer, and terminates it with ZwTerminateProcess.
+  - source: S7
+    quote: Alinubx.sys exposes IOCTL 0x222024 to request kernel-mode process termination through the device path
+      \\.\Alinubx.
+  - source: S2
+    quote: the driver acts as an EDR killer that contains a hardcoded list of 145 antivirus and EDR processes that
+      it aims to terminate.
+- id: C19
+  section: capabilities
+  statement: According to Delphos, opening processes with KernelMode access bypasses the user-mode access check,
+    so the driver can defeat Protected Process Light (PPL).
+  evidence:
+  - source: S1
+    quote: The driver calls ObOpenObjectByPointer with AccessMode=KernelMode, which bypasses the normal user-mode
+      SeAccessCheck path at handle-open time.
+  - source: S1
+    quote: That is why it can defeat Protected Process Light (PPL); the protection many security products rely on
+      to survive an administrator.
+- id: C20
+  section: capabilities
+  statement: LOLDrivers states that successful termination of protected processes by Alinubx.sys is not established.
+  evidence:
+  - source: S7
+    quote: Access requires the driver to be loaded and its device to be accessible; successful termination of protected
+      processes is not established.
+- id: C21
+  section: capabilities
+  statement: The driver is signed through the Microsoft Windows Hardware Compatibility Publisher chain with a March
+    2023 signing timestamp, years before the campaign.
+  attack:
+  - T1553.002
+  evidence:
+  - source: S1
+    quote: The driver is signed through the Microsoft Windows Hardware Compatibility Publisher chain, with a signing
+      timestamp of March 2023, years before this campaign.
+  - source: S6
+    quote: signed through the Microsoft Windows Hardware Compatibility Publisher chain, with a signing date of March 2023
+- id: C22
+  section: capabilities
+  statement: Alinubx.sys is a renamed, identity-swapped copy of CcProtect.sys v1.32 from the CnCrypt product (Henan
+    Dafeng Software), a driver already catalogued on LOLDrivers as a BYOVD process killer with public PoC code.
+  evidence:
+  - source: S1
+    quote: The driver is a renamed, identity-swapped version of CcProtect.sys, a driver already listed on LOLDrivers
+      with public proof-of-concept killer code. Same product string, same version, same submitter, same process-kill
+      primitive.
+  - source: S1
+    quote: The version resources and VirusTotal pivots tie Alinubx.sys to the CnCrypt/CcProtect driver line from
+      Henan Dafeng Software Co., Ltd.
+  - source: S8
+    quote: CnCrypt CcProtect.sys is a signed kernel driver used by BlackSnufkin BYOVD research as a process-killer
+      provider.
+- id: C23
+  section: capabilities
+  statement: 'The rename lowered antivirus detection: the known CcProtect.sys had 7 of about 70 detections in August,
+    the renamed driver none; by 10 September Alinubx.sys had 3 detections.'
+  evidence:
+  - source: S6
+    quote: 7 of about 70 engines flagging it in August, while the renamed driver showed zero
+  - source: S1
+    quote: VirusTotal's last analysis for Alinubx.sys showed 3 malicious detections and 71 undetected engines, on
+      September 10, 2026.
+- id: C24
+  section: capabilities
+  attack:
+  - T1014
+  - T1055.004
+  - T1557
+  observed: false
+  statement: The driver also contains dormant rootkit, DLL-injection and traffic-redirection features that require
+    a configuration file (Alinubx.ccf); they were not activated in this deployment.
+  evidence:
+  - source: S1
+    quote: 'The driver carries more than this deployment used: file and registry hiding, process and driver interception,
+      DLL interception, network control, port redirection, WFP traffic handling, APC-based usermode DLL injection,
+      and a rule configuration system based on \SystemRoot\Alinubx.ccf.'
+  - source: S1
+    quote: In this deployment, Alinubx acted as an AV killer and its broader functionality remained unconfigured.
+      A future deployment with Alinubx.ccf present could activate the rest.
+  - source: S2
+    quote: The researchers noted that Alinubx.sys contains additional capabilities for file and registry hiding,
+      DLL injection, driver and process interception, traffic manipulation, and port redirection, but do not appear
+      to be activated in this campaign.
+- id: C25
+  section: capabilities
+  statement: Rapuncel steals saved browser passwords and bypasses Chrome/Edge app-bound encryption by injecting
+    a helper DLL that calls the browser's own decryption (Elevation) service.
+  attack:
+  - T1555.003
+  evidence:
+  - source: S1
+    quote: the stealer reads saved passwords from more than 25 web browsers.
+  - source: S1
+    quote: it injects a small piece of code directly into the browser process. This code impersonates the browser
+      itself and calls Chrome’s own password-decryption service from inside Chrome
+  - source: S2
+    quote: To bypass Google's app-bound encryption protection present on Chrome, Edge, and related browsers, Rapuncel
+      injects a helper DLL into the app and invokes its own Elevation Service.
+  - source: S5
+    quote: The malware also included a method for bypassing the app-bound encryption used by Chrome and Edge by
+      injecting code into the browser and requesting decryption from inside the trusted browser process.
+- id: C26
+  section: capabilities
+  statement: Rapuncel also collects cryptocurrency wallet files, Discord, Steam and Telegram sessions, Windows Credential
+    Manager contents, documents named like 'password'/'seed'/'wallet'/'recovery', screenshots of all monitors and
+    a system profile.
+  attack:
+  - T1005
+  - T1539
+  - T1555.004
+  - T1113
+  - T1082
+  evidence:
+  - source: S1
+    quote: cryptocurrency wallet files from more than 30 wallet applications, ... Discord login tokens, ... Telegram
+      session data, ... Windows credential store ... any document whose name contains words like "password," "seed,"
+      "wallet," or "recovery", ... a screenshot of every monitor connected to the machine, and ... a detailed profile
+      of the system.
+  - source: S2
+    quote: Data from 30 cryptocurrency wallets ... Discord, Steam, and Telegram session credentials ... Windows
+      Credential Manager contents ... Screenshots from every connected monitor
+  - source: S3
+    quote: In addition to passwords, the malware collects all information about crypto wallets, Discord and Steam
+      logins, session data from Telegram, Windows credentials, and documents containing the keywords password, seed,
+      wallet, or recovery.
+- id: C27
+  section: capabilities
+  statement: The technical section of the LastPass report gives different target counts (19+ browsers, 34+ wallets)
+    than its summary (25+ browsers, 30+ wallets).
+  evidence:
+  - source: S1
+    quote: targets 19 or more browsers, 34 or more cryptocurrency wallets, Discord, Steam, Telegram, and Windows
+      Credential Manager
+- id: C28
+  section: infrastructure
+  statement: Stolen data is zipped and uploaded to 2.26.126[.]50 via 'POST /upload' HTTP formatting over raw TCP;
+    the loader and driver do not contact external infrastructure.
+  attack:
+  - T1560
+  - T1041
+  evidence:
+  - source: S1
+    quote: 'The Rapuncel stealer exfiltration pattern: ZIP upload to 2.26.126[.]50 using POST /upload HTTP/1.1 over
+      raw TCP.'
+  - source: S1
+    quote: The delivery loader and Alinubx kernel driver do not communicate with external infrastructure in this
+      deployment.
+  - source: S2
+    quote: The stolen information is compressed and uploaded to an external endpoint at '2.26.126[.]50' using an
+      HTTP-formatted request sent over raw TCP.
+- id: C29
+  section: infrastructure
+  statement: A Cloudflare-fronted traffic director (istatlmenus[.]com) supplies the payload server at runtime, so
+    the operator can switch payload servers without touching the GitHub lures.
+  evidence:
+  - source: S1
+    quote: A separate Cloudflare-fronted server (istatlmenus[.]com) acts as the dynamic traffic director for the
+      chain.
+  - source: S1
+    quote: This means the operator can redirect victims to a different payload server at any time simply by updating
+      that single endpoint without touching any of the GitHub lure infrastructure.
+  - source: S4
+    quote: A separate server behind Cloudflare then chose where to send the final malware. This meant the attackers
+      could switch to a new malware server without changing the GitHub pages.
+- id: C30
+  section: infrastructure
+  statement: Payload servers albinofennel[.]com and hanselarinmusky[.]com served the ZIP; albinofennel[.]com served
+    lure pages for at least 40 other brands from a templated JavaScript kit.
+  evidence:
+  - source: S1
+    quote: The victim is ultimately sent to the attacker's payload server (albinofennel[.]com or hanselarinmusky[.]com)
+  - source: S1
+    quote: the TIME team identified albinofennel[.]com was serving at least 40 other branded impersonation lure
+      pages
+  - source: S1
+    quote: albinofennel.com uses a window.__PM__ JavaScript kit generating dynamic lure pages from URL path parameters,
+      supporting 40+ simultaneous brand impersonations.
+  - source: S6
+    quote: serving impersonation pages for at least 40 brands
+- id: C31
+  section: infrastructure
+  statement: 'The infrastructure rotates: one payload server dropped off DNS during analysis while two stayed live,
+    and the terminal redirect domains are parked but still registered.'
+  evidence:
+  - source: S1
+    quote: in this campaign, one payload server dropped off DNS during the analysis window while two others stayed
+      live.
+  - source: S1
+    quote: macperformancetools[.]com and zaffersnouty[.]com are the terminal destinations of the redirect chain.
+      Both are currently parked
+- id: C32
+  section: victimology
+  statement: Targeting was opportunistic brand impersonation; the impersonated companies were not named and no victim
+    count was published.
+  evidence:
+  - source: S1
+    quote: This was opportunistic brand impersonation.
+  - source: S3
+    quote: LastPass reports that at least 40 companies are affected by the name misuse for infected GitHub repositories,
+      but does not name them.
+- id: C33
+  section: background
+  statement: 'Trend Micro documented BoryptGrab in March 2026: a stealer spread through over a hundred SEO-optimised
+    fake GitHub repositories, with Russian-language comments and Russia-located IPs suggesting a possible origin.'
+  evidence:
+  - source: S10
+    quote: The BoryptGrab campaign uses fake SEO‑optimized GitHub repositories and deceptive download pages to distribute
+      a data‑stealing malware family
+  - source: S10
+    quote: searching for the software tool patterns leads to over a hundred public Github repositories delivering
+      malware.
+  - source: S10
+    quote: Malware code from different stages of the attack contains Russian-language comments and/or log messages.
+      IP addresses associated with the campaign are also located in Russia, suggesting a possible origin for the
+      attacker.
+  - source: S3
+    quote: the security provider states that comments, log messages, and IP addresses in the components found by
+      Trend Micro point to a Russian origin.
+- id: C34
+  section: background
+  statement: Arctic Wolf reported at least 292 brand-impersonation GitHub repositories since 26 June 2026 delivering
+    a BoryptGrab-lineage stealer, with identical fake badges and a Russian-speaking operator.
+  evidence:
+  - source: S11
+    quote: Since 26 June 2026, an unattributed threat actor has published at least 292 deceptive brand-impersonation
+      GitHub pages and .github repositories
+  - source: S11
+    quote: spoofed badges added to increase user trust in the download (e.g., “VirusTotal Approved,” “Secure Archive,”
+      “Verified Access”)
+  - source: S11
+    quote: language and hosting artifacts point to a Russian-speaking operator.
+  - source: S6
+    quote: a separate wave of nearly 300 such repositories in July
+- id: C43
+  section: background
+  statement: Unlike Rapuncel, BoryptGrab also delivered a reverse SSH backdoor (TunnesshClient) and a Go downloader
+    (HeaconLoad) for persistent access.
+  evidence:
+  - source: S1
+    quote: BoryptGrab delivers a reverse SSH backdoor (TunnesshClient) and a Golang downloader (HeaconLoad), providing
+      persistent remote access.
+  - source: S10
+    quote: delivers multiple payloads, including a reverse SSH backdoor
+- id: C35
+  section: attribution
+  statement: Delphos assesses with high confidence that the loader was produced by the Cruciferra PUROSANGUE crypter
+    package (documented by Proofpoint in 2025) or a close derivative.
+  evidence:
+  - source: S1
+    quote: Delphos Labs assesses with high confidence that the loader was produced by the Cruciferra PUROSANGUE
+      crypter package or a close derivative, which was previously documented by Proofpoint in 2025.
+  - source: S2
+    quote: while they also found that its loader was built with the Cruciferra PUROSANGUE crypter.
+- id: C36
+  section: attribution
+  statement: Delphos places Rapuncel in the BoryptGrab ecosystem with moderate confidence (related variant or sibling
+    build), but the evidence is insufficient to call it the same campaign or operator.
+  evidence:
+  - source: S1
+    quote: the behavioral and artifact-level overlap is sufficient to place it within the BoryptGrab ecosystem with
+      moderate confidence.
+  - source: S1
+    quote: there is insufficient evidence to conclude these are the same campaign or the same operator.
+  - source: S5
+    quote: However, available evidence is insufficient to conclude that the same group operated both campaigns.
+- id: C37
+  section: attribution
+  statement: Concrete overlaps with BoryptGrab include the shared lure brand passathook-cs2 and identical collection
+    artifacts (UserInformation.txt with BUILD NAME, misspelled Filegraber directory).
+  evidence:
+  - source: S1
+    quote: The passathook-cs2 brand appears in both datasets
+  - source: S1
+    quote: Both payloads produce UserInformation.txt with a BUILD NAME field, installed_applications.txt, and a
+      misspelled Filegraber directory.
+  - source: S10
+    quote: passathook-cs2-github-io-2.56.2.zip
+- id: C38
+  section: detection
+  statement: 'Recommended hunts target driver lineage and behaviour: the NvFsFilter service, writes of nvfsflt64.sys,
+    drivers whose signer names Henan Dafeng or contain CnCrypt, the \\.\Alinubx device, and a driver load followed
+    by security-process terminations.'
+  evidence:
+  - source: S1
+    quote: Microsoft-attested drivers whose Authenticode programName contains the Henan Dafeng identity or whose
+      version resources contain CnCrypt.
+  - source: S1
+    quote: Service creation for NvFsFilter or file writes to C:\Windows\System32\drivers\nvfsflt64.sys.
+  - source: S1
+    quote: Driver load followed by termination of security processes through kernel activity.
+  - source: S6
+    quote: a driver whose signing details name Henan Dafeng Software or contain "CnCrypt"
+- id: C39
+  section: detection
+  statement: Further behavioural indicators are vsdbg.exe spawning non-Microsoft child processes, PE files with
+    an oversized .reloc section, and the files browser_decryption.log / sends.log in %TEMP%.
+  evidence:
+  - source: S1
+    quote: vsdbg.exe spawning non-Microsoft child processes, and a PE file whose raw .reloc section is far larger
+      than its declared relocation size
+  - source: S1
+    quote: browser_decryption.log / sends.log | Rapuncel forensic footprint in %TEMP% output folder
+- id: C40
+  section: detection
+  statement: Microsoft's vulnerable driver blocklist matches known hashes, so a renamed or recompiled driver is
+    not covered; the effective control is blocking the driver, its signer or lineage.
+  evidence:
+  - source: S1
+    quote: There were 0 of 20 SHA256 matches because the blocklist is a list of known bad hashes. New malware can
+      avoid matching by creating a new hash with techniques such as a filename swap or a recompilation.
+  - source: S1
+    quote: 'The control is policy enforcement: block the driver, deny the signer or lineage, or prevent the drop.
+      If the driver is trusted and not blocklisted, administrator rights are enough to install and use it.'
+  - source: S6
+    quote: a renamed or recompiled driver produces a new hash that the list does not carry
+- id: C41
+  section: detection
+  statement: The exfiltration IP should be treated as historical context, not a standalone block rule.
+  evidence:
+  - source: S1
+    quote: Treat this IP as historical and shared-infrastructure context, not a standalone block rule without corroborating
+      request framing.
+- id: C42
+  section: detection
+  statement: Affected users should treat browser credentials, wallets, sessions and Credential Manager contents
+    as exposed, change them from a clean device, and remediate the kernel-level compromise offline or in Safe Mode.
+  evidence:
+  - source: S1
+    quote: Treat every credential stored in the browser on that machine as exposed
+  - source: S1
+    quote: Change those credentials from a separate, known-clean device rather than the affected one
+  - source: S5
+    quote: affected systems may also require offline or Safe Mode remediation rather than relying solely on conventional
+      antivirus cleanup.
+judgments:
+- id: J1
+  statement: The operators will very likely continue the campaign with new brands, infrastructure and a renamed
+    or recompiled driver, so the hash and domain IOCs in this report will age quickly.
+  confidence: moderate
+  likelihood: very likely
+  based_on:
+  - C1
+  - C6
+  - C22
+  - C29
+  - C30
+  - C31
+  - C34
+  rationale: One kit serves 40+ brands, the redirect layer lets the operator swap payload servers at will, infrastructure
+    was maintained after detection, and the driver was already re-identified once (CcProtect -> Alinubx). A parallel
+    BoryptGrab-lineage wave with 292 repositories shows the model scales.
+- id: J2
+  statement: Controls that rely on hashes, file names or reputation (VirusTotal, the Microsoft blocklist, hash-based
+    LOLDrivers rules) will very likely miss the next variant of this driver; signer- and lineage-based driver
+    blocking is the more durable control.
+  confidence: moderate
+  likelihood: very likely
+  based_on:
+  - C5
+  - C21
+  - C22
+  - C23
+  - C40
+  rationale: A filename and identity swap alone dropped VirusTotal detections from 7 to 0, neither the original
+    nor the renamed driver was blocklisted, and the Microsoft attestation remained valid.
+- id: J3
+  statement: Rapuncel is likely one strand of the broader BoryptGrab ecosystem of SEO-poisoned GitHub lures rather
+    than an isolated campaign. Russian-language indicators have been reported for earlier BoryptGrab waves, not for
+    Rapuncel itself; attribution to a specific actor is not possible on current evidence.
+  confidence: moderate
+  likelihood: likely
+  based_on:
+  - C33
+  - C34
+  - C36
+  - C37
+  rationale: Shared lure brand, identical collection artifacts and fake badge texts connect the waves; the Russian-language
+    indicators come from the related BoryptGrab reporting, not from Rapuncel itself, and the loader is a commercial
+    crypter that several crews can buy.
+- id: J4
+  statement: The kernel-level stage is likely to succeed mainly where users work with local administrator rights;
+    enforcing standard-user accounts sharply reduces, but does not remove, the risk.
+  confidence: moderate
+  likelihood: likely
+  based_on:
+  - C14
+  - C18
+  - C40
+  rationale: The loader needs elevation (UAC bypass techniques) before it can install the driver, and the researchers
+    state that administrator rights are enough to install and use the trusted driver. Whether any of the three elevation
+    methods works from a standard-user context is not documented.
+gaps:
+- No victim count is published and the ~40 impersonated brands are not named; it is unknown whether DACH-specific
+  software or brands were among the lures.
+- The Delphos Labs companion analysis and the SOCFortress write-up (blocked, HTTP 403) were not stored as sources;
+  technical details rely on the LastPass report, which incorporates the joint findings.
+- The list of 145 targeted AV/EDR process names is not published, so it is unknown which products common in DACH
+  organisations are covered.
+- 'PPL bypass: Delphos states the driver can defeat Protected Process Light, while LOLDrivers states that successful
+  termination of protected processes is not established. Not independently tested.'
+- The LastPass report contains inconsistent target counts (25+/30+ vs. 19+/34+ browsers/wallets).
+- Which three elevation methods the loader uses, and whether any works for standard users, is not documented.
+- Start date of the Rapuncel wave is unknown (the report says only that the campaign has been running for months).
+- Purpose of the Chrome PreferenceMACs registry-key deletion seen in sandbox runs of the terminal domains is unclear.
+- abuse.ch (ThreatFox, MalwareBazaar) had no entries for Rapuncel or Alinubx at collection time; hashes come only
+  from the LastPass report and LOLDrivers and were not independently analysed.
+- Whether Microsoft has added Alinubx.sys or the CcProtect lineage to the vulnerable driver blocklist since 17 September
+  2026 was not checked.

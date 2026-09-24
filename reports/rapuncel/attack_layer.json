@@ -55,14 +55,14 @@
       "tactic": "privilege-escalation",
       "score": 1,
       "color": "#e06666",
-      "comment": ""
+      "comment": "capability, not observed"
     },
     {
       "techniqueID": "T1055.004",
       "tactic": "stealth",
       "score": 1,
       "color": "#e06666",
-      "comment": ""
+      "comment": "capability, not observed"
     },
     {
       "techniqueID": "T1055.012",
@@ -90,7 +90,7 @@
       "tactic": "stealth",
       "score": 1,
       "color": "#e06666",
-      "comment": ""
+      "comment": "capability, not observed"
     },
     {
       "techniqueID": "T1027.001",
@@ -146,14 +146,14 @@
       "tactic": "credential-access",
       "score": 1,
       "color": "#e06666",
-      "comment": ""
+      "comment": "capability, not observed"
     },
     {
       "techniqueID": "T1557",
       "tactic": "collection",
       "score": 1,
       "color": "#e06666",
-      "comment": ""
+      "comment": "capability, not observed"
     },
     {
       "techniqueID": "T1082",

@@ -22,9 +22,9 @@ Once defences are down, Rapuncel collects browser credentials (including Chrome 
 
 1. **The operators will very likely continue the campaign with new brands, infrastructure and a renamed or recompiled driver, so the hash and domain IOCs in this report will age quickly.** [1][2][3][5][6][8][9]
    *Confidence: moderate · Likelihood: very likely.* One kit serves 40+ brands, the redirect layer lets the operator swap payload servers at will, infrastructure was maintained after detection, and the driver was already re-identified once (CcProtect -> Alinubx). A parallel BoryptGrab-lineage wave with 292 repositories shows the model scales.
-2. **Controls that rely on hashes, file names or reputation (VirusTotal, the Microsoft blocklist, hash-based LOLDrivers rules) will almost certainly miss the next variant of this driver; signer- and lineage-based driver blocking is the control that holds.** [1][5][6]
-   *Confidence: high · Likelihood: almost certainly.* A filename and identity swap alone dropped VirusTotal detections from 7 to 0, neither the original nor the renamed driver was blocklisted, and the Microsoft attestation remained valid.
-3. **Rapuncel is likely one strand of a broader, Russian-speaking-linked BoryptGrab ecosystem of SEO-poisoned GitHub lures rather than an isolated campaign; attribution to a specific actor is not possible on current evidence.** [1][3][5][7][9][10]
+2. **Controls that rely on hashes, file names or reputation (VirusTotal, the Microsoft blocklist, hash-based LOLDrivers rules) will very likely miss the next variant of this driver; signer- and lineage-based driver blocking is the more durable control.** [1][5][6]
+   *Confidence: moderate · Likelihood: very likely.* A filename and identity swap alone dropped VirusTotal detections from 7 to 0, neither the original nor the renamed driver was blocklisted, and the Microsoft attestation remained valid.
+3. **Rapuncel is likely one strand of the broader BoryptGrab ecosystem of SEO-poisoned GitHub lures rather than an isolated campaign. Russian-language indicators have been reported for earlier BoryptGrab waves, not for Rapuncel itself; attribution to a specific actor is not possible on current evidence.** [1][3][5][7][9][10]
    *Confidence: moderate · Likelihood: likely.* Shared lure brand, identical collection artifacts and fake badge texts connect the waves; the Russian-language indicators come from the related BoryptGrab reporting, not from Rapuncel itself, and the loader is a commercial crypter that several crews can buy.
 4. **The kernel-level stage is likely to succeed mainly where users work with local administrator rights; enforcing standard-user accounts sharply reduces, but does not remove, the risk.** [1][2][4][5]
    *Confidence: moderate · Likelihood: likely.* The loader needs elevation (UAC bypass techniques) before it can install the driver, and the researchers state that administrator rights are enough to install and use the trusted driver. Whether any of the three elevation methods works from a standard-user context is not documented.
@@ -81,7 +81,7 @@ No threat actor has been named. Delphos assesses with high confidence that the l
 
 ## 5. MITRE ATT&CK Mapping
 
-The mapping below uses ATT&CK v19. Three rows, T1014 Rootkit, T1055.004 APC injection and T1557 Adversary-in-the-Middle, come from the primary report's list of driver features that are present in code but were not activated in this deployment [1][2]. They describe what the driver can do, not what was observed.
+The mapping below uses ATT&CK v19. Three rows, T1014 Rootkit, T1055.004 APC injection and T1557 Adversary-in-the-Middle, are marked *capability, not observed*: they come from the primary report's list of driver features that are present in code but were not activated in this deployment [1][2].
 
 | Tactic | Technique | Evidence |
 |---|---|---|
@@ -89,10 +89,10 @@ The mapping below uses ATT&CK v19. Three rows, T1014 Rootkit, T1055.004 APC inje
 | Execution | [T1204.002](https://attack.mitre.org/techniques/T1204/002) User Execution: Malicious File | [1][2][3] |
 | Execution, Stealth | [T1574.001](https://attack.mitre.org/techniques/T1574/001) Hijack Execution Flow: DLL <br>*cited as T1574.002 (revoked, now T1574.001)* | [1][2][3] |
 | Persistence, Privilege Escalation | [T1543.003](https://attack.mitre.org/techniques/T1543/003) Create or Modify System Process: Windows Service | [1][2] |
-| Privilege Escalation, Stealth | [T1055.004](https://attack.mitre.org/techniques/T1055/004) Process Injection: Asynchronous Procedure Call | [1] |
+| Privilege Escalation, Stealth | [T1055.004](https://attack.mitre.org/techniques/T1055/004) Process Injection: Asynchronous Procedure Call *(capability, not observed)* | [1][2] |
 | Privilege Escalation, Stealth | [T1055.012](https://attack.mitre.org/techniques/T1055/012) Process Injection: Process Hollowing | [1] |
 | Privilege Escalation | [T1548.002](https://attack.mitre.org/techniques/T1548/002) Abuse Elevation Control Mechanism: Bypass User Account Control | [1][5] |
-| Stealth | [T1014](https://attack.mitre.org/techniques/T1014) Rootkit | [1] |
+| Stealth | [T1014](https://attack.mitre.org/techniques/T1014) Rootkit *(capability, not observed)* | [1][2] |
 | Stealth | [T1027.001](https://attack.mitre.org/techniques/T1027/001) Obfuscated Files or Information: Binary Padding | [1][2] |
 | Stealth | [T1036.005](https://attack.mitre.org/techniques/T1036/005) Masquerading: Match Legitimate Resource Name or Location | [1][2][3] |
 | Defense Impairment | [T1553.002](https://attack.mitre.org/techniques/T1553/002) Subvert Trust Controls: Code Signing | [1][5] |
@@ -100,7 +100,7 @@ The mapping below uses ATT&CK v19. Three rows, T1014 Rootkit, T1055.004 APC inje
 | Credential Access | [T1539](https://attack.mitre.org/techniques/T1539) Steal Web Session Cookie | [1][2][7] |
 | Credential Access | [T1555.003](https://attack.mitre.org/techniques/T1555/003) Credentials from Password Stores: Credentials from Web Browsers | [1][2][3] |
 | Credential Access | [T1555.004](https://attack.mitre.org/techniques/T1555/004) Credentials from Password Stores: Windows Credential Manager | [1][2][7] |
-| Credential Access, Collection | [T1557](https://attack.mitre.org/techniques/T1557) Adversary-in-the-Middle | [1] |
+| Credential Access, Collection | [T1557](https://attack.mitre.org/techniques/T1557) Adversary-in-the-Middle *(capability, not observed)* | [1][2] |
 | Discovery | [T1082](https://attack.mitre.org/techniques/T1082) System Information Discovery | [1][2][7] |
 | Collection | [T1005](https://attack.mitre.org/techniques/T1005) Data from Local System | [1][2][7] |
 | Collection | [T1113](https://attack.mitre.org/techniques/T1113) Screen Capture | [1][2][7] |
@@ -109,7 +109,7 @@ The mapping below uses ATT&CK v19. Three rows, T1014 Rootkit, T1055.004 APC inje
 
 Mapped to ATT&CK Enterprise v19.2. Navigator layer: [`attack_layer.json`](./attack_layer.json)
 
-## 6. Relevance: DACH organisations; employees downloading software via search engines
+## 6. Relevance: DACH
 
 *Analyst assessment.*
 
@@ -117,9 +117,9 @@ Mapped to ATT&CK Enterprise v19.2. Navigator layer: [`attack_layer.json`](./atta
 
 The kill chain depends on elevation. Endpoints where users hold local administrator rights, typically on freelancer and contractor laptops, in small IT teams and on developer machines, are at the highest risk. On such a machine the attacker has already stolen browser-stored credentials, including SSO sessions, before any alert could fire.
 
-**For the event and ticketing sector** exposure is above average for three reasons. Production and box-office staff frequently install tools ad hoc on shared or personal laptops at venues, often with admin rights. Ticketing, payment-provider and social-media accounts are typically saved in the browser. A stolen session there can mean fraudulent ticket sales, payout redirection or account takeover on the channels used for customer communication. Seasonal staff are rarely covered by software-installation policies.
+**For the event and ticketing sector** exposure is above average for three reasons. Production and box-office staff frequently install tools ad hoc on shared or personal laptops at venues, often with admin rights. Ticketing, payment-provider and social-media accounts are typically saved in the browser. A stolen session there can mean fraudulent ticket sales, payout redirection or account takeover on the channels used for customer communication. Seasonal staff are rarely covered by software-installation policies. This assessment draws on the author's experience as managing director of an event company.
 
-Regulatory impact: stolen browser credentials that give access to customer or payment data may trigger GDPR Art. 33 notification duties. For entities in scope of NIS2 (in Austria the NISG 2024, in Germany the NIS2 implementation act), a kernel-level compromise of an endpoint with privileged access is likely a reportable significant incident.
+Regulatory impact: stolen browser credentials that give access to customer or payment data may trigger GDPR Art. 33 notification duties. For entities in scope of NIS2 (in Austria the NISG 2026, applicable from 1 October 2026; in Germany the NIS2 implementation act), a kernel-level compromise of an endpoint with privileged access may constitute a reportable significant incident, depending on the thresholds.
 
 ## 7. Detection & Mitigation
 
@@ -159,7 +159,7 @@ The operators lost one brand lure and some infrastructure, not their kit. The re
 
 ## 9. Indicators of Compromise
 
-IOCs are defanged. Shown are indicators reported by a primary source, an intel database or at least two independent sources; 12 further candidate(s) mentioned by a single secondary source are only in [`iocs.csv`](./iocs.csv). Verdicts come from automated enrichment (ThreatFox, URLhaus, MalwareBazaar, VirusTotal) and reflect the enrichment date – IOCs age quickly, re-validate before blocking.
+IOCs are defanged. Shown are indicators reported by a primary source, an intel database or at least two independent sources; 12 further candidate(s) mentioned by a single secondary source are only in [`iocs.csv`](./iocs.csv); 1 indicator(s) that are not suitable for blocking are listed there with an explanatory note. Verdicts come from automated enrichment (ThreatFox, URLhaus, MalwareBazaar, VirusTotal) and reflect the enrichment date – IOCs age quickly, re-validate before blocking.
 
 ### IPV4
 
@@ -173,7 +173,6 @@ IOCs are defanged. Shown are indicators reported by a primary source, an intel d
 |---|---|---|---|---|
 | `5f0cfe8357bb52b45068ddbac053e32bc38e6cb5e086746f5402657b0a5cfb1c` | malicious (high) | 7/75 | hacktool.vulndriver/ccprotect | [1][6] |
 | `611b3ba687b7f46319a19609605ddfe5225e6d85277d8e923eea3fdb6f7b5b61` | malicious (medium) | 3/75 | vulndriver/cncrypt | [1][4] |
-| `1e6c1766ac78d7adfdae71d361cb132d972771897ae9065503b135cb812d7c35` | known, no detections | 0/75 |  | [1] |
 | `26db14b956e33f69b3397a36387d32e01eb63613acff91069dc76b6ed7de45a8` | malicious (high) | 30/75 | trojan.driverloader/genericfca | [1] |
 | `75018b06c7105a1dca391805d17b402aed35ebd515b92d461236eafbd606cb40` | malicious (high) | 48/75 | trojan.stealer/loregun | [1] |
 | `aefbc6e04320e9a0e80f2323f8a897c4fdb222a37b0b87d76e850109decbfadd` | malicious (high) | 50/75 | trojan.stealer/encoder | [1] |
@@ -211,15 +210,15 @@ Machine-readable: [`iocs.csv`](./iocs.csv)
 
 ## 11. Sources
 
-1. LastPass TIME – "Threat Intel | One Kit, Forty Companies: How a Malware-as-a-Service Platform Used GitHub as a Distribution Network for its Campaign - The LastPass Blog", 2026-09-17. <https://blog.lastpass.com/posts/lastpass-delphos-report-rapuncel-infostealer> (accessed 2026-09-24; reliability B, primary)
+1. LastPass TIME – "Threat Intel | One Kit, Forty Companies: How a Malware-as-a-Service Platform Used GitHub as a Distribution Network for its Campaign", 2026-09-17. <https://blog.lastpass.com/posts/lastpass-delphos-report-rapuncel-infostealer> (accessed 2026-09-24; reliability B, primary)
 2. BleepingComputer – "Fake LastPass Authenticator GitHub repos push new Rapuncel infostealer", 2026-09-18. <https://www.bleepingcomputer.com/news/security/fake-lastpass-authenticator-github-repos-push-new-rapuncel-infostealer/> (accessed 2026-09-24; reliability B, secondary)
 3. CyberInsider – "Fake LastPass downloads on GitHub pushed password-stealing malware", 2026-09-18. <https://cyberinsider.com/fake-lastpass-downloads-on-github-pushed-password-stealing-malware/> (accessed 2026-09-24; reliability C, secondary)
-4. LOLDrivers – "Alinubx.sys — LOLDrivers", 2026-08-27. <https://www.loldrivers.io/drivers/84a3007a-de5e-4622-bfc5-f05d927c3618/> (accessed 2026-09-24; reliability B, database)
+4. LOLDrivers – "Alinubx.sys", 2026-08-27. <https://www.loldrivers.io/drivers/84a3007a-de5e-4622-bfc5-f05d927c3618/> (accessed 2026-09-24; reliability B, database)
 5. The Hacker News – "Fake LastPass Authenticator Installer Abuses Microsoft-Signed Driver to Kill Antivirus and EDR", 2026-09-21. <https://thehackernews.com/2026/09/fake-lastpass-authenticator-installer.html> (accessed 2026-09-24; reliability C, secondary)
-6. LOLDrivers – "CcProtect.sys — LOLDrivers", 2026-06-16. <https://www.loldrivers.io/drivers/3e3067b0-3d74-46fe-9f57-1ae3a0293958/> (accessed 2026-09-24; reliability B, database)
+6. LOLDrivers – "CcProtect.sys", 2026-06-16. <https://www.loldrivers.io/drivers/3e3067b0-3d74-46fe-9f57-1ae3a0293958/> (accessed 2026-09-24; reliability B, database)
 7. heise online – "LastPass discovers new infostealer variant disguised as GitHub repo", 2026-09-19. <https://www.heise.de/en/news/LastPass-discovers-new-infostealer-variant-disguised-as-GitHub-repo-11459182.html> (accessed 2026-09-24; reliability B, secondary)
 8. Security Affairs – "Fake LastPass on GitHub Led to an Infostealer That Killed 145 Security Tools", 2026-09-23. <https://securityaffairs.com/199577/malware/fake-lastpass-on-github-led-to-an-infostealer-that-killed-145-security-tools.html> (accessed 2026-09-24; reliability C, secondary)
-9. Arctic Wolf Labs – "Malicious GitHub Campaign: Fake "Arctic Wolf" and 290+ Brand-Impersonation Repositories Deliver BoryptGrab-Lineage Infostealer - Arctic Wolf", 2026-07-13. <https://arcticwolf.com/resources/blog/fake-github-repositories-deliver-boryptgrab-lineage-infostealer/> (accessed 2026-09-24; reliability B, primary)
+9. Arctic Wolf Labs – "Malicious GitHub Campaign: Fake "Arctic Wolf" and 290+ Brand-Impersonation Repositories Deliver BoryptGrab-Lineage Infostealer", 2026-07-13. <https://arcticwolf.com/resources/blog/fake-github-repositories-deliver-boryptgrab-lineage-infostealer/> (accessed 2026-09-24; reliability B, primary)
 10. Trend Micro Research – "New BoryptGrab Stealer Targets Windows Users via Deceptive GitHub Pages", 2026-03-05. <https://www.trendmicro.com/en_us/research/26/c/boryptgrab-stealer-targets-users-via-deceptive-github-pages.html> (accessed 2026-09-24; reliability B, primary)
 
 ---

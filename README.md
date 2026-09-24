@@ -45,7 +45,9 @@ piece of evidence against the archived source text before the report is rendered
 - **IOCs** – defanged, with automated reputation lookups (abuse.ch, VirusTotal) at the date of the
   report. Indicators age quickly; re-validate before blocking.
 
-Each report folder contains `report.md`, `attack_layer.json` (ATT&CK Navigator) and `iocs.csv`.
+Each report folder contains `report.md`, `attack_layer.json` (ATT&CK Navigator), `iocs.csv`,
+`claims.yaml` (every factual statement with its verbatim quotes) and `sources.csv` (source
+list with publisher, reliability rating and SHA-256 fingerprint of the archived copy).
 
 ## License
 
