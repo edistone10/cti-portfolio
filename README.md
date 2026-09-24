@@ -29,8 +29,12 @@ of Cyber Threat Intelligence Research and Practice*.
 
 ## Methodology
 
+Reports are produced with a self-developed Python toolchain (not published) that archives the
+sources, extracts and enriches IOCs, maps ATT&CK techniques and automatically checks every quoted
+piece of evidence against the archived source text before the report is rendered.
+
 - **Evidence first** – every factual statement is backed by a verbatim quote from a cited public
-  source, checked against an archived copy of that source. A fact counts as *corroborated* only
+  source; the toolchain verifies each quote against an archived copy of that source. A fact counts as *corroborated* only
   when two independent publishers support it.
 - **Source rating** – sources are rated on the Admiralty scale; primary research (vendors, the
   affected brand, CERTs) is preferred, news coverage serves as corroboration.
