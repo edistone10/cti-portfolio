@@ -1,0 +1,202 @@
+{
+  "name": "Rapuncel: MaaS infostealer distributed through fake GitHub repositories",
+  "versions": {
+    "attack": "19.2",
+    "layer": "4.5",
+    "navigator": "5.1.0"
+  },
+  "domain": "enterprise-attack",
+  "description": "Techniques observed in public reporting on Rapuncel: MaaS infostealer distributed through fake GitHub repositories",
+  "techniques": [
+    {
+      "techniqueID": "T1608.006",
+      "tactic": "resource-development",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1204.002",
+      "tactic": "execution",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1574.001",
+      "tactic": "execution",
+      "score": 1,
+      "color": "#e06666",
+      "comment": "cited as T1574.002 (revoked, now T1574.001)"
+    },
+    {
+      "techniqueID": "T1574.001",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": "cited as T1574.002 (revoked, now T1574.001)"
+    },
+    {
+      "techniqueID": "T1543.003",
+      "tactic": "persistence",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1543.003",
+      "tactic": "privilege-escalation",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1055.004",
+      "tactic": "privilege-escalation",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1055.004",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1055.012",
+      "tactic": "privilege-escalation",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1055.012",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1548.002",
+      "tactic": "privilege-escalation",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1014",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1027.001",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1036.005",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1553.002",
+      "tactic": "defense-impairment",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1685",
+      "tactic": "defense-impairment",
+      "score": 1,
+      "color": "#e06666",
+      "comment": "cited as T1562.001 (revoked, now T1685)"
+    },
+    {
+      "techniqueID": "T1539",
+      "tactic": "credential-access",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1555.003",
+      "tactic": "credential-access",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1555.004",
+      "tactic": "credential-access",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1557",
+      "tactic": "credential-access",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1557",
+      "tactic": "collection",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1082",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1005",
+      "tactic": "collection",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1113",
+      "tactic": "collection",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1560",
+      "tactic": "collection",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1041",
+      "tactic": "exfiltration",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    }
+  ],
+  "gradient": {
+    "colors": [
+      "#ffffff",
+      "#e06666"
+    ],
+    "minValue": 0,
+    "maxValue": 1
+  }
+}
