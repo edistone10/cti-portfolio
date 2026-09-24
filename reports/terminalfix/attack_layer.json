@@ -1,0 +1,209 @@
+{
+  "name": "TerminalFix: ClickFix variant delivers a reverse tunnel via fake Cloudflare CAPTCHAs",
+  "versions": {
+    "attack": "19.2",
+    "layer": "4.5",
+    "navigator": "5.1.0"
+  },
+  "domain": "enterprise-attack",
+  "description": "Techniques observed in public reporting on TerminalFix: ClickFix variant delivers a reverse tunnel via fake Cloudflare CAPTCHAs",
+  "techniques": [
+    {
+      "techniqueID": "T1189",
+      "tactic": "initial-access",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1566.002",
+      "tactic": "initial-access",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1053.005",
+      "tactic": "execution",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1053.005",
+      "tactic": "persistence",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1053.005",
+      "tactic": "privilege-escalation",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1059.001",
+      "tactic": "execution",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1204.002",
+      "tactic": "execution",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1204.004",
+      "tactic": "execution",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1574.001",
+      "tactic": "execution",
+      "score": 1,
+      "color": "#e06666",
+      "comment": "cited as T1574.002 (revoked, now T1574.001)"
+    },
+    {
+      "techniqueID": "T1574.001",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": "cited as T1574.002 (revoked, now T1574.001)"
+    },
+    {
+      "techniqueID": "T1547.001",
+      "tactic": "persistence",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1547.001",
+      "tactic": "privilege-escalation",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1027.003",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1036.005",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1070.004",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1140",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1564.001",
+      "tactic": "stealth",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1018",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1069.002",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1082",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1087.002",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1482",
+      "tactic": "discovery",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1071.001",
+      "tactic": "command-and-control",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1090",
+      "tactic": "command-and-control",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1105",
+      "tactic": "command-and-control",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1572",
+      "tactic": "command-and-control",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    },
+    {
+      "techniqueID": "T1567.002",
+      "tactic": "exfiltration",
+      "score": 1,
+      "color": "#e06666",
+      "comment": ""
+    }
+  ],
+  "gradient": {
+    "colors": [
+      "#ffffff",
+      "#e06666"
+    ],
+    "minValue": 0,
+    "maxValue": 1
+  }
+}

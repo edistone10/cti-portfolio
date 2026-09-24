@@ -1,0 +1,712 @@
+# Evidence for the report in this folder: every factual statement (claim) with verbatim quotes
+# from its sources. Source IDs (S<n>) are resolved in sources.csv; the report numbers them [n].
+claims:
+# --- summary / background ------------------------------------------------------------------
+- id: C1
+  section: summary
+  date: 2026-08-28
+  statement: Microsoft Threat Intelligence published its analysis of TerminalFix, a ClickFix variant that uses compromised
+    websites with fake Cloudflare CAPTCHA overlays and targets organisations across multiple industries.
+  evidence:
+  - source: S10
+    quote: Microsoft Threat Intelligence has observed a TerminalFix campaign, a variant of ClickFix, targeting organizations
+      across multiple industries. The campaign uses compromised websites to display a fake Cloudflare CAPTCHA verification
+      overlay that tricks users into copying and executing a malicious PowerShell command.
+  - source: S3
+    quote: On 28 August 2026, Microsoft Threat intelligence reported details of what they have dubbed a TerminalFix campaign,
+      a variant of ClickFix, targeting organizations across multiple industries.
+  - source: S8
+    quote: The campaign, targeting organizations across multiple sectors, leverages compromised websites as a starting
+      point to serve fake Cloudflare CAPTCHA verifications
+- id: C2
+  section: background
+  statement: Unlike classic ClickFix, which sends victims to the Windows Run dialog, TerminalFix directs them to Windows
+    Terminal or PowerShell, where longer multi-line scripts execute more reliably.
+  evidence:
+  - source: S10
+    quote: While traditional ClickFix campaigns direct victims to the Windows Run dialog, TerminalFix campaigns apply the
+      same technique but direct users to Windows Terminal or PowerShell instead, increasing the likelihood that complex,
+      multi-line scripts execute successfully.
+  - source: S7
+    quote: TerminalFix differs from normal ClickFix attacks in that it directs users to Windows Terminal or PowerShell,
+      which enables successful execution of more complex, multi-line scripts.
+- id: C3
+  section: background
+  statement: Where ClickFix victims usually end up with an infostealer, TerminalFix delivers a multi-stage chain that ends
+    in network-level access through a reverse tunnel; the BSI describes it as a further development of ClickFix that can
+    reach deeper into networks.
+  evidence:
+  - source: S10
+    quote: Unlike earlier ClickFix variants that typically deliver a single infostealer, this TerminalFix campaign deploys
+      a sophisticated multi-stage attack chain that combines DLL sideloading, steganographic payload extraction, extensive
+      Active Directory reconnaissance, and a custom reverse-tunnel implant
+  - source: S7
+    quote: Unlike typical ClickFix attacks that often lead to infostealer malware infections, this campaign uses a multi-stage
+      intrusion chain that ultimately gives attackers a reverse tunnel into the victim’s internal network.
+  - source: S2
+    quote: One way or another, ClickFix victims usually end up with information-stealing malware of some sort.
+  - source: S1
+    quote: Die beobachteten TerminalFix-Angriffe stellen eine Weiterentwicklung der bereits bekannten ClickFix-Attacken
+      dar. Während Letztere in der Vergangenheit in der Regel lediglich einzelne Rechner kompromittierten, besteht TerminalFix
+      eine weitere Möglichkeit, tiefer in Netzwerke einzudringen
+- id: C4
+  section: background
+  statement: Proofpoint researcher Tommy Madjar disputes that TerminalFix is new, noting that Terminal-based lures date
+    back to early ClickFix activity in 2024 and that the example does not stand out from clusters such as ClearFake or ErrTraffic.
+  evidence:
+  - source: S4
+    quote: Proofpoint senior threat researcher Tommy Madjar argues that the use of Terminal windows dates back to some of
+      the earliest ClickFix activity documented in 2024.
+  - source: S4
+    quote: Microsoft’s example does not stand out from established clusters such as ClearFake or ErrTraffic.
+- id: C5
+  section: background
+  statement: Malwarebytes notes that steganography alone does not distinguish TerminalFix from other ClickFix campaigns.
+  evidence:
+  - source: S2
+    quote: The use of steganography is notable, but does not set TerminalFix apart from other ClickFix campaigns that have
+      used the same method.
+# --- distribution ---------------------------------------------------------------------------
+- id: C6
+  section: distribution
+  attack: [T1189, T1204.004]
+  statement: A compromised website overlays a fake Cloudflare Turnstile check; interacting with it silently copies a PowerShell
+    command to the clipboard, and on-screen instructions tell the user to paste it into Windows Terminal or PowerShell.
+  evidence:
+  - source: S10
+    quote: This overlay spoofs the Cloudflare CAPTCHA interface, complete with the Cloudflare logo, “Verify you are human”
+      checkbox, and a spinner animation
+  - source: S10
+    quote: When the user interacts with the fake verification prompt, a malicious PowerShell command is silently copied
+      to their clipboard. The on-screen instructions then guide the user to open Windows Terminal or PowerShell and paste
+      the command.
+  - source: S2
+    quote: A website visitor is presented with a fake Cloudflare CAPTCHA which, when clicked, secretly copies a malicious
+      command to their clipboard.
+  - source: S1
+    quote: Er wird hierzu ein schädlicher PowerShell-Befehl in die Zwischenablage kopiert, der dann vom Nutzer als Befehl
+      ausgeführt werden muss.
+- id: C7
+  section: distribution
+  attack: [T1566.002]
+  statement: According to the BSI, victims reach the compromised websites via phishing or social engineering, or because
+    they visit them regularly (watering hole).
+  evidence:
+  - source: S1
+    quote: Internetnutzer rufen eine kompromittierte Webseite auf, auf die sie z.B. mittels Phishing/Social-...Engineering
+      geführt werden oder von Nutzern regelmäßig besucht werden (Water-Holing).
+- id: C8
+  section: distribution
+  statement: The BSI found the JavaScript used for the fake CAPTCHA on several hundred websites in historical data.
+  evidence:
+  - source: S1
+    quote: Das für das Captcha verwendete Javascript konnte in historischen Daten auf mehreren Hundert Webseiten festgestellt
+      werden.
+# --- infection chain ------------------------------------------------------------------------
+- id: C9
+  section: infection_chain
+  attack: [T1059.001]
+  statement: The pasted command poses as a Cloudflare verification, downloads a ZIP archive with the signed LockScreenContentServer.exe
+    and a malicious dui70.dll, extracts it to C:\ProgramData and prints a fake success message to allay suspicion.
+  evidence:
+  - source: S10
+    quote: Once executed, the PowerShell command masquerades as a Cloudflare verification process while downloading a ZIP
+      archive containing a legitimate binary (LockScreenContentServer.exe) and a malicious DLL (dui70.dll) used for sideloading.
+  - source: S10
+    quote: Extracts the archive to C:\ProgramData\f47f2a8c21c9df4e
+  - source: S1
+    quote: Der schädliche Befehl lädt ein ZIP-Archiv herunter, entpackt es und führt dieses aus. Zeitgleich wird die angeblich
+      erfolgreiche Bearbeitung des o.g. CAPTCHAs angezeigt, um Misstrauen vonseiten des Opfers zu verhindern.
+  - source: S8
+    quote: the PowerShell command is designed to download a ZIP archive containing a legitimate binary ("LockScreenContentServer.exe")
+      and a rogue DLL ("dui70.dll") in order to initiate a DLL sideloading attack.
+- id: C10
+  section: infection_chain
+  attack: [T1574.001, T1036.005]
+  statement: LockScreenContentServer.exe statically imports dui70.dll; because Windows searches the application directory
+    before System32, the planted dui70.dll is side-loaded into the signed process.
+  evidence:
+  - source: S10
+    quote: LockScreenContentServer.exe is a legitimate, signed binary that has a static import dependency on dui70.dll,
+      the Windows DirectUI Engine.
+  - source: S10
+    quote: Because the Windows loader resolves the application directory before the System32 directory, the planted DLL
+      is loaded in place of the legitimate one, a technique known as DLL sideloading (T1574.001).
+  - source: S3
+    quote: Because the Windows loader resolves the application directory before the System32 directory, the planted DLL
+      is loaded in place of the legitimate one, a technique known as DLL sideloading.
+  - source: S5
+    quote: Among other things, the script calls the signed and benign Windows file “LockScreenContentServer.exe”, through
+      which part of the malware is installed as “dui70.dll” via sideloading.
+  - source: S1
+    quote: Im ZIP-Archiv befinden sich sowohl eine ausführbare als auch eine maliziöse .dll-Datei, die per DLL-Sideloading
+      zusammenwirken.
+- id: C11
+  section: infection_chain
+  attack: [T1140]
+  statement: The malicious dui70.dll is unsigned, claims to be the Windows DirectUI Engine with a forged 2104 timestamp,
+    and decodes its embedded payload entirely in memory.
+  evidence:
+  - source: S10
+    quote: Masquerading DLL claiming to be “Windows DirectUI Engine” (unsigned, forged future timestamp 2104)
+  - source: S10
+    quote: On load, the DLL’s initialization path retrieves this resource, decodes it entirely in memory, and transfers
+      execution to it
+  - source: S7
+    quote: a malicious DLL file, which decodes and launches an obfuscated payload directly in memory.
+- id: C12
+  section: infection_chain
+  attack: [T1027.003, T1105, T1070.004]
+  statement: The DLL runs PowerShell that downloads three PNG images, extracts an executable and two DLL halves from their
+    pixel data, reassembles them on disk and deletes the images afterwards.
+  evidence:
+  - source: S10
+    quote: The script downloads three images from attacker-controlled domains, extracts binary data encoded in pixel values,
+      and reassembles the components on disk.
+  - source: S10
+    quote: After extraction, the source images are deleted to reduce forensic artifacts.
+  - source: S2
+    quote: 'A PowerShell script reads the images’ pixel data: The first eight bytes specify the embedded file’s length,
+      while the remaining data is reconstructed into an executable and two DLL fragments, which are joined on the victim’s
+      disk.'
+  - source: S7
+    quote: the threat actor used steganography to hide executables and DLL fragments in the pixel data of three PNG images.
+  - source: S1
+    quote: Diese Bilder enthalten weiteren Schadcode, der von der Malware auf dem System zusammengesetzt wird.
+- id: C13
+  section: infection_chain
+  attack: [T1547.001, T1053.005, T1564.001]
+  statement: Persistence is set twice under the name LockScreenContentServer_MuODG5yBM - an HKCU Run key and a scheduled
+    task that re-runs the payload every 60 minutes - and the malware directory is hidden.
+  evidence:
+  - source: S10
+    quote: configures both mechanisms under the same masquerading name LockScreenContentServer_MuODG5yBM
+  - source: S10
+    quote: A scheduled task ensures the malware re-executes every 60 minutes
+  - source: S10
+    quote: The malware directory is hidden using system and hidden file attributes
+  - source: S7
+    quote: The malware establishes persistence through a scheduled task and a Registry Run key, configured to execute every
+      hour.
+  - source: S1
+    quote: ein Registry-Run-Eintrag, eine z.B. stündlich wiederkehrende Aufgabe sowie versteckte Daten und Verzeichnisse
+      angelegt.
+- id: C14
+  section: infection_chain
+  attack: [T1482, T1069.002, T1087.002, T1018, T1082]
+  statement: The malware enumerates domain trusts, domain admins and Active Directory users and computers, collects system
+    information and pings servers named like domain controllers, databases, backup, gateways and mail systems.
+  evidence:
+  - source: S10
+    quote: conducting thorough domain reconnaissance—including domain trust enumeration, domain admin discovery, Active Directory
+      user description harvesting, and targeted server ping sweeps
+  - source: S10
+    quote: The observed names correspond to common infrastructure roles, including domain controllers, databases, backup,
+      gateways, and mail systems.
+  - source: S7
+    quote: it performs reconnaissance by probing for domain controllers, databases, backup servers, gateways, and mail systems;
+      collecting system information; and enumerating Active Directory (AD).
+  - source: S1
+    quote: Es kommt zum Ausspähen der Infrastruktur. Untersucht werden Domänen, Rechtevergaben, das Active Directory, betriebene
+      Server, vorhandene Backup-Systeme uvm.
+- id: C15
+  section: infection_chain
+  statement: Microsoft and the BSI both read the reconnaissance as an assessment of whether the compromised host is valuable
+    for further attacks.
+  evidence:
+  - source: S10
+    quote: This activity is consistent with a hands-on-keyboard operator or an automated pre-assessment script designed
+      to evaluate whether the compromised host is a valuable target
+  - source: S1
+    quote: Nach aktuellem Kenntnisstand dient dieser Schritt zur Analyse, welchen Wert das kompromittierte System für weitere
+      Angriffe haben könnte.
+- id: C16
+  section: infection_chain
+  attack: [T1059.001]
+  statement: A persistent PowerShell loop watches a text file for new commands, runs them with Invoke-Expression and writes
+    the results to an output file.
+  evidence:
+  - source: S10
+    quote: A persistent PowerShell file-watch loop monitors a text file for new commands, executes them via Invoke-Expression,
+      and writes results to an output file
+  - source: S8
+    quote: The attack also delivers a persistent PowerShell file-watch loop that monitors a text file for new commands,
+      executes them via Invoke-Expression, and writes results to an output file.
+- id: C17
+  section: infection_chain
+  attack: [T1105]
+  statement: The attacker brings a signed, unmodified embeddable Python runtime (3.14.5) from python.org and starts the
+    tunnel script client.py via pythonw.exe without a visible window.
+  evidence:
+  - source: S10
+    quote: 'The attacker brings their own interpreter: an unmodified, signed embeddable Python runtime pulled directly from
+      the official python.org distribution.'
+  - source: S10
+    quote: downloads the embeddable Python 3.14.5 archive over TLS 1.2, unpacks it into the same directory, and launches
+      the tunnel with no visible window via pythonw.exe
+  - source: S1
+    quote: Ein Reverse-Tunnel wird eingerichtet. Hierzu installieren die Angreifer eine Python-Laufzeitumgebung.
+  - source: S3
+    quote: deploys a Python runtime and a custom tunneling implant that gives the attacker full TCP proxy access through
+      the victim network.
+# --- capabilities ---------------------------------------------------------------------------
+- id: C18
+  section: capabilities
+  attack: [T1572, T1071.001, T1090]
+  statement: client.py connects outbound over TLS on port 443, upgrades to a WebSocket and relays arbitrary TCP connections
+    for the operator (SOCKS5-style); certificate verification is disabled.
+  evidence:
+  - source: S10
+    quote: It dials outbound to the C2 over TLS/443, upgrades the session to a WebSocket, and uses that channel to relay
+      arbitrary TCP connections on behalf of the operator.
+  - source: S10
+    quote: Certificate verification is always disabled (CERT_NONE).
+  - source: S7
+    quote: The most important component is a custom Python reverse-tunnel module that connects to an outbound address (gitnow[.]dev:443
+      ) over an encrypted WebSocket, supporting SOCKS5-style arbitrary TCP proxying.
+  - source: S1
+    quote: Die dazugehörige .py-Datei baut über TLS auf Port 443 und WebSockets eine Verbindung zur Infrastruktur der Täter
+      auf.
+- id: C19
+  section: capabilities
+  statement: The tunnel multiplexes many connections over one WebSocket, rotates realistic browser User-Agent strings and
+    can be shut down remotely by the C2 server.
+  evidence:
+  - source: S10
+    quote: Custom 7-byte binary protocol header (type + stream ID + length) multiplexes many tunneled connections over one
+      WebSocket.
+  - source: S10
+    quote: Randomly selects from four realistic browser UA strings (Chrome, Firefox, Safari) per connection.
+  - source: S7
+    quote: The reverse-tunnel also supports multiplexing multiple connections over one WebSocket, rotating realistic browser
+      User-Agent strings, keepalive, and remote shutdown.
+  - source: S2
+    quote: This allows them to use the victim’s computer as a stepping stone into the rest of the network.
+- id: C20
+  section: capabilities
+  statement: Combined with the reconnaissance results, the tunnel turns the compromised host into a pivot point to any
+    internal system reachable from it.
+  evidence:
+  - source: S10
+    quote: Combined with the reconnaissance data gathered earlier (domain controllers, SQL servers, backup servers, gateway),
+      this turns the compromised machine into a full network pivot point
+  - source: S7
+    quote: Microsoft says this can turn the infected endpoint into a network pivot, giving the operator a route to systems
+      discovered during the earlier AD and network reconnaissance operation.
+  - source: S5
+    quote: They also set up a SOCKS proxy, thus having access to the attacked organization’s network through a tunnel.
+- id: C21
+  section: capabilities
+  statement: The BSI warns that commands the attacker runs inside the Python runtime may not be logged.
+  evidence:
+  - source: S1
+    quote: Durch den Angreifer in der Python-Laufzeitumgebung übertragene und ausgeführte Befehle werden u. U. nicht protokolliert.
+- id: C22
+  section: capabilities
+  attack: [T1567.002]
+  statement: According to the BSI, attackers may set up cloud storage such as Azure in advance and use provider tools such
+    as azcopy to exfiltrate data.
+  evidence:
+  - source: S1
+    quote: Der Angreifer richtet ggf. direkt Online-Speicher z. B. in der Azure-Cloud, um Daten später dorthin exfiltrieren
+      zu können. Hierzu nutzen Angreifer dann auch von den Cloud-Anbietern herausgegebene Werkzeuge wie azcopy im Falle
+      von Azure.
+- id: C23
+  section: capabilities
+  statement: Reports received by the BSI indicate attempts to deploy ransomware in these attacks, combined with data theft
+    and extortion (double extortion).
+  evidence:
+  - source: S1
+    quote: Beim BSI eingegangene Meldungen weisen zusätzlich darauf hin, dass im Rahmen dieser Angriffe versucht wurde, Ransomware
+      zu installieren und im Rahmen von Double Extortion auch Daten auszuleiten bzw. die Opfer im Anschluss mit der Veröffentlichung
+      zu erpressen.
+- id: C24
+  section: capabilities
+  statement: In the chain it analysed, Microsoft did not observe hands-on-keyboard follow-up activity; it warns that such
+    access is typically used for privilege escalation, disabling security controls, data theft and ransomware.
+  evidence:
+  - source: S10
+    quote: Microsoft did not observe the downstream actions described below in the analyzed chain.
+  - source: S10
+    quote: In the hands-on-keyboard phase that typically follows, attackers leverage this access to escalate privileges,
+      disable security controls, exfiltrate sensitive data, and deploy ransomware across the organization.
+  - source: S7
+    quote: Microsoft discovered the attacks in the wild but did not observe hands-on activity.
+- id: C25
+  section: capabilities
+  statement: Microsoft gives inconsistent locale coverage for the system-information collection - English, Spanish and
+    German in the detailed analysis, English and Spanish in the overview.
+  evidence:
+  - source: S10
+    quote: The attacker collects system metadata and the script includes English, Spanish, and German locale variants
+  - source: S10
+    quote: system information collection in both English and Spanish locales.
+# --- infrastructure -------------------------------------------------------------------------
+- id: C26
+  section: infrastructure
+  statement: Microsoft lists gitnow[.]dev as the tunnel C2 (port 443), bestsocialmedianewspapper[.]com and offlineupdater[.]com
+    as steganographic image hosts with failover, and linked-log[.]com as a compromised website.
+  evidence:
+  - source: S10
+    quote: gitnow[.]dev | Domain | C2 server for custom reverse tunnel implant (port 443)
+  - source: S10
+    quote: bestsocialmedianewspapper[.]com | Domain | Steganographic image hosting / payload delivery
+  - source: S10
+    quote: offlineupdater[.]com | Domain | Steganographic image hosting / failover
+  - source: S10
+    quote: hxxps://linked-log[.]com/ | Domain | Compromised website
+  - source: S8
+    quote: The sideloaded DLL is responsible for retrieving next-stage payloads hidden within PNG images from external domains
+      ("bestsocialmedianewspapper[.]com" or "offlineupdater[.]com")
+  - source: S7
+    quote: connects to an outbound address (gitnow[.]dev:443 ) over an encrypted WebSocket
+# --- victimology ----------------------------------------------------------------------------
+- id: C27
+  section: victimology
+  statement: In August 2026 the BSI was informed of the compromise of a state institution's network; its analysis found
+    the course of the attack consistent with Microsoft's TerminalFix description.
+  evidence:
+  - source: S1
+    quote: Im August 2026 wurde das Bundesamt für Sicherheit in der Informationstechnik (BSI) über die Kompromittierung
+      des Netzwerks einer staatlichen Institution informiert. Anschließende Analysen zeigen, dass der Tathergang mit Beobachtungen
+      von mehrstufigen Angriffen übereinstimmt, die Microsoft kürzlich als TerminalFix-Kampagne in seinem Blog vorgestellt
+      hatte
+  - source: S1
+    quote: Deutsche Institutionen über TerminalFix-Kampagne kompromittiert
+- id: C28
+  section: victimology
+  date: 2026-08-07
+  statement: Between 7 and 12 August 2026 the bulk of the data was exfiltrated from two Berlin Senate administrations (Urban
+    Development, Building and Housing; Mobility, Transport, Climate Protection and Environment).
+  evidence:
+  - source: S19
+    quote: Nach bisherigen Erkenntnissen erfolgte der wesentliche Teil des Datenabflusses im Zeitraum vom 7. bis 12. August
+      2026.
+  - source: S13
+    quote: Der Zeitpunkt des Datenabflusses lag zwischen dem 7. und 12. August 2026
+  - source: S6
+    quote: 'August 7 to 12, 2026: In the two Senate administrations for Urban Development, Building and Housing, and for
+      Mobility, Transport, Environment and Climate Protection, data is being exfiltrated by unknown persons.'
+- id: C29
+  section: victimology
+  date: 2026-08-14
+  statement: On 14 August 2026 the IT systems of both Senate administrations were disconnected from the Berlin state network
+    as a precaution.
+  evidence:
+  - source: S19
+    quote: Am 14. August 2026 wurden die IT-Systeme der beiden betroffenen Senatsverwaltungen für Mobilität, Verkehr, Klimaschutz
+      und Umwelt (SenMVKU) sowie für Stadtentwicklung, Bauen und Wohnen (SenStadt) vorsorglich vom Netz getrennt
+  - source: S5
+    quote: 'August 14, 2026: The two Senate administrations were isolated from the state network.'
+- id: C30
+  section: victimology
+  date: 2026-08-17
+  statement: The State of Berlin disclosed an ICT incident in its state network and set up an ICT emergency crisis team;
+    the State Criminal Police Office, the public prosecutor and the BSI are involved.
+  evidence:
+  - source: S11
+    quote: Der IKT-Notfallkrisenstab unter Leitung des Landesbevollmächtigen für Informationssicherheit des Landes Berlin
+      wurde mit dem heutigen Tag eingerichtet.
+  - source: S11
+    quote: eingebunden sind auch das Landeskriminalamt, die Staatsanwaltschaft Berlin und das Bundesamt für Sicherheit
+      in der Informationstechnik (BSI).
+  - source: S5
+    quote: An emergency crisis team was established, the BKA and LKA are investigating, and the BSI is informed.
+- id: C31
+  section: victimology
+  date: 2026-08-28
+  statement: The attackers tried to extort the State of Berlin, which refused to pay.
+  evidence:
+  - source: S13
+    quote: Nach dem IKT-Vorfall im Landesnetz Berlin soll das Land Berlin erpresst werden.
+  - source: S13
+    quote: Das Land Berlin lässt sich nicht erpressen
+  - source: S19
+    quote: Zuvor hatte die Tätergruppe das Land Berlin erpresst und damit gedroht, die entwendeten Daten zu veröffentlichen,
+      sollte nicht gezahlt werden. Das Land Berlin ist auf diese Erpressung nicht eingegangen.
+  - source: S6
+    quote: The attackers have stolen data and are demanding a ransom.
+- id: C32
+  section: victimology
+  statement: The ransomware group Rhysida claimed the Berlin attack on its leak site and demanded 30 Bitcoin (about two
+    million euros).
+  evidence:
+  - source: S6
+    quote: In the evening, Der Spiegel reports that the well-known ransomware gang Rhysida is said to be behind it. On their
+      darknet website, there is a verifiable demand for 30 Bitcoin (around 2 million euros)
+  - source: S14
+    quote: Die kriminelle Gruppe ... forderte ein Lösegeld von 30 Bitcoin
+- id: C33
+  section: victimology
+  date: 2026-09-01
+  statement: The Senate administration confirmed that passwords for some specialist applications had also been exfiltrated;
+    all 12,000 systems of the State of Berlin were being checked.
+  evidence:
+  - source: S6
+    quote: Passwords for some specialist applications were also exfiltrated.
+  - source: S6
+    quote: All 12,000 systems of the state of Berlin are currently being checked around the clock.
+- id: C34
+  section: victimology
+  date: 2026-09-04
+  statement: The attackers published the copied data on the darknet on 4 September 2026; heise reports about 1.44 million
+    files and a 5.8 TB data package.
+  evidence:
+  - source: S19
+    quote: Eine kriminelle Angreifergruppe hat sich Zugriff auf das digitale Netzwerk der Berliner Verwaltung verschafft,
+      Datenbestände kopiert und diese am 4. September 2026 im Darknet veröffentlicht.
+  - source: S5
+    quote: 'September 4, 2026: The criminals published around 1.44 million files on the darknet.'
+  - source: S14
+    quote: veröffentlichte das 5,8 Terabyte große Datenpaket im Darknet.
+- id: C35
+  section: victimology
+  statement: According to the State of Berlin, the leaked data is mainly unstructured data from shared and personal staff
+    directories rather than from specialist applications, and includes personal data of employees, citizens and companies.
+  evidence:
+  - source: S19
+    quote: Nach aktuellem Stand handelt es sich überwiegend um unstrukturierte Daten aus gemeinsam genutzten und persönlichen
+      Verzeichnissen von Mitarbeiterinnen und Mitarbeitern der betroffenen Behörden – nicht um Daten aus spezifischen Fachanwendungen.
+      Es ist davon auszugehen, dass auch personenbezogene Daten von Beschäftigten des Landes Berlin, aber auch von Bürgerinnen
+      und Bürgern sowie Daten von Unternehmen betroffen sind.
+- id: C36
+  section: victimology
+  statement: For the Rhysida leak site, the BSI (citing a commercial provider) reports that 92 % of listings are followed
+    by a data release, on average after 11 days; there is no significant focus on Germany, a strong focus on education and
+    health, and public administration ranks among the top five sectors.
+  evidence:
+  - source: S1
+    quote: Nach Kenntnislage eines kommerziellen Dienstleisters des BSI folgt in 92 % der Fälle auf die Nennung auf der Leak-Seite
+      Rhysida auch eine Datenveröffentlichung. Dabei vergehen zwischen Nennung auf der Leak-Seite und Veröffentlichung von
+      gestohlenen Daten im Durchschnitt 11 Tage. Eine Auswertung der Leak-Seite zeigt keinen signifikanten Fokus auf Deutschland
+      als Region. Die Angreifer zeigen einen starken Fokus auf den Bildungs- und Gesundheitssektor.
+  - source: S5
+    quote: As the BSI reports, citing an unnamed external service provider, in 92 percent of cases where criminals threaten
+      publication, it actually occurs.
+  - source: S5
+    quote: Rhysida therefore primarily focuses on the healthcare and education sectors – government agencies are still among
+      the five most frequently mentioned target types.
+- id: C49
+  section: victimology
+  statement: After the leak, the BSI warned of follow-on attacks, in particular highly personalised phishing disguised as
+    e-mail from the Berlin Senate administration and identity theft with the stolen documents.
+  evidence:
+  - source: S16
+    quote: Hochgradig personalisiertes Phishing, das z.B. als echte E-Mail der Senatsverwaltung Berlin getarnt ist.
+  - source: S16
+    quote: Identitätsdiebstahl und Betrugsdelikte mit gestohlenen Dokumenten oder Kontaktdaten
+  - source: S14
+    quote: Das BSI weist zudem auf eine erhöhte Bedrohung durch gezielte Phishing-Angriffe nach dem Datenabfluss hin.
+# --- attribution ----------------------------------------------------------------------------
+- id: C37
+  section: attribution
+  date: 2026-09-04
+  statement: The BSI published advisory BITS-B 2026-287419-1032 on TerminalFix with criticality 2/yellow (measures must be
+    taken promptly), and on the same day stated on Mastodon that it is closely involved in the Berlin incident response, linking
+    the post to the TerminalFix advisory.
+  evidence:
+  - source: S1
+    quote: BITS-B Nr. 2026-287419-1032, Version 1.0, 04.09.2026
+  - source: S1
+    quote: '2 / Gelb: Maßnahmen müssen zeitnah ergriffen werden.'
+  - source: S15
+    quote: Als BSI sind wir intensiv in die Vorfallbearbeitung im Land Berlin eingebunden und haben die daraus gewonnenen
+      Informationen zur Erhöhung der Cybersicherheit anderer Institutionen genutzt.
+  - source: S15
+    quote: 'Ausführlicher BSI-IT-Sicherheitshinweis zur TerminalFix-Kampagne:'
+- id: C38
+  section: attribution
+  statement: heise reads the BSI Mastodon post as confirmation that TerminalFix was the attack vector used by Rhysida in
+    Berlin, and notes that the BSI advisory itself does not contain this information.
+  evidence:
+  - source: S5
+    quote: The BSI confirmed in a post on Mastodon that the TerminalFix method is the attack vector used by the cyber gang
+      Rhysida. This information is not found in the authority’s BSI security notice (BITS) ( PDF). However, on Mastodon,
+      the BSI directly refers to this notice.
+- id: C39
+  section: attribution
+  statement: Reports received by the BSI show the use of LoremIpsumLoader (aka AxolotLoader) in the campaign; the BSI attributes
+    this malware to the same financially motivated group that is responsible for the Rhysida ransomware and leak site.
+  evidence:
+  - source: S1
+    quote: Aus beim BSI eingegangenen Meldungen geht der Einsatz der Malware LoremIpsumLoader (aka AxolotLoader) im Rahmen
+      der Angriffskampagne hervor
+  - source: S1
+    quote: Nach Kenntnislage des BSI wird diese Malware derselben finanziell motivierten Gruppe zugeordnet, welche für die
+      Ransomware und Leak-Seite Rhysida verantwortlich ist.
+- id: C40
+  section: attribution
+  statement: The BSI attributes Rhysida to the financially motivated group Vice Spider (aka Vice Society, DEV-0832, Vanilla
+    Tempest), active since at least mid-2021 and using Rhysida almost exclusively since June 2023.
+  evidence:
+  - source: S1
+    quote: Die Ransomware und Leak-Seite Rhysida wird der finanziell motivierten Gruppe Vice Spider (aka Vice Society, White
+      Nefas, White Hekate, DEV-0832, Vanilla Tempest) zugeordnet. Nach Kenntnislage des BSI ist die Gruppe seit mindestens
+      Mitte 2021 aktiv.
+  - source: S1
+    quote: Seit Juni 2023 nutzt die Gruppe nahezu exklusiv die Ransomware Rhysida und die zugehörige Leak-Seite.
+- id: C41
+  section: attribution
+  statement: The BSI assesses the campaign as run by opportunistic, purely financially motivated cybercriminals; no link
+    to state or politically motivated actors has been established.
+  evidence:
+  - source: S1
+    quote: Nach derzeitigen Erkenntnissen wird die aktuelle Kampagne von Tätern aus dem Cybercrime-Bereich durchgeführt.
+      Diese handeln opportunistisch und sind ausschließlich finanziell motiviert. Ein Zusammenhang mit staatlichen bzw.
+      politisch motivierten Akteuren konnte bislang nicht hergestellt werden.
+  - source: S14
+    quote: Man gehe davon aus, dass die Tat ... ausschließlich finanziell motiviert
+- id: C42
+  section: attribution
+  statement: BlueVoyant (as reported by Dark Reading) observed the Lorem Ipsum loader operators switch to ClickFix lures
+    on compromised WordPress sites in late May 2026, with victims told to paste a PowerShell command into Windows Terminal,
+    and links the campaign to Rapid Brigantine (aka Vanilla Tempest, DEV-0832, Vice Society).
+  evidence:
+  - source: S17
+    quote: Researchers at BlueVoyant, who have tracked the Lorem Ipsum campaign since February 2026, observed the shift
+      in late May
+  - source: S17
+    quote: Instead, the threat actors are now relying on ClickFix lures hosted on compromised WordPress sites to deliver
+      their malware.
+  - source: S17
+    quote: the pop-up instructs the user to paste a provided PowerShell command, disguised as a Microsoft Edge security
+      intelligence update, into their Windows Terminal.
+  - source: S17
+    quote: now strongly believes the campaign is linked to Rapid Brigantine, a financially motivated cybercriminal group
+      also tracked as Vanilla Tempest, DEV-0832, and Vice Society.
+# --- detection ------------------------------------------------------------------------------
+- id: C43
+  section: detection
+  statement: Microsoft recommends alerting on LockScreenContentServer.exe running from any path other than C:\Windows\SystemApps.
+  evidence:
+  - source: S10
+    quote: Alert on LockScreenContentServer.exe executing from non-standard paths (anything other than C:\Windows\SystemApps).
+  - source: S3
+    quote: Alert on LockScreenContentServer[.]exe executing from non-standard paths to identify this activity across your
+      environment.
+  - source: S7
+    quote: monitoring ‘LockScreenContentServer.exe’ outside its normal path
+- id: C44
+  section: detection
+  statement: Microsoft recommends restricting PowerShell and the Run dialog for standard users via AppLocker, App Control
+    for Windows or Group Policy.
+  evidence:
+  - source: S10
+    quote: Use AppLocker, Application Control for Windows, or Group Policy to restrict PowerShell execution for standard
+      users.
+  - source: S8
+    quote: restrict PowerShell and Run dialog execution for standard users through AppLocker, Application Control for Windows,
+      or Group Policy
+  - source: S4
+    quote: organizations should restrict PowerShell and Run dialog execution for standard users through methods like Group
+      Policy, Application Control for Windows, or AppLocker.
+- id: C45
+  section: detection
+  statement: Microsoft and the BSI recommend PowerShell script block logging and Constrained Language Mode.
+  evidence:
+  - source: S10
+    quote: Enable PowerShell script block logging to detect and analyze obfuscated or encoded commands
+  - source: S10
+    quote: Enforce use of PowerShell Constrained Language Mode where possible
+  - source: S1
+    quote: Aktivierung von PowerShell Script Block Logging zur Dokumentation von PowerShell Prozessen
+  - source: S1
+    quote: Betrieb von PowerShell im Constrained Language Mode, um die Ausführung gefährlicher PowerShell-Befehle zu verhindern
+- id: C46
+  section: detection
+  statement: Affected hosts should be treated as entry points into the network rather than isolated systems; credentials
+    reachable from them, including domain admin accounts, should be rotated.
+  evidence:
+  - source: S10
+    quote: Organizations that find indicators of this campaign should assume the attacker has network-level access through
+      the compromised host. Credential rotation should be prioritized for any credentials accessible from the affected machine,
+      including domain admin accounts if the host was domain-joined.
+  - source: S1
+    quote: Betrachtung kompromittierter Rechner als Einstiegspunkte ins Netzwerk für lateral Movement, nicht als isolierte
+      Systeme.
+  - source: S7
+    quote: If compromise is confirmed, it is advisable to investigate for lateral movement and to rotate credentials, including
+      domain admin credentials, if accessible from the infected host.
+- id: C47
+  section: detection
+  statement: Microsoft Defender detects the chain among others as Trojan:Win32/TermFix, Trojan:Win32/ClickFix, Trojan:Win32/Posilod
+    and Trojan:Python/Indigo.SA.
+  evidence:
+  - source: S10
+    quote: Microsoft Defender Antivirus – Trojan:Win32/ClickFix.* – Trojan:Win32/TermFix.*
+  - source: S10
+    quote: Microsoft Defender Antivirus – Trojan:Win32/Posilod.* – Trojan:Win64/DLLHijack.DAB!MTB
+  - source: S10
+    quote: Microsoft Defender Antivirus – Trojan:Python/Indigo.SA
+- id: C48
+  section: detection
+  statement: Proofpoint's Madjar considers broad Run/Terminal restrictions rarely practical and recommends user training,
+    blocking malicious sites and detecting suspicious execution instead.
+  evidence:
+  - source: S4
+    quote: argues that wide restrictions on Run dialog and Terminal access are "rarely practical."
+  - source: S4
+    quote: Defenses should therefore focus on training users not to execute commands copied from untrusted websites, blocking
+      malicious sites before users reach them, and detecting suspicious execution when prevention fails.
+judgments:
+- id: J1
+  statement: TerminalFix was likely the initial access vector in the August 2026 compromise of two Berlin Senate administrations,
+    but no primary source states this explicitly.
+  confidence: moderate
+  likelihood: likely
+  based_on: [C27, C28, C37, C38]
+  rationale: The BSI advisory describes a compromised state institution in August whose attack matches TerminalFix, and
+    the BSI's same-day Mastodon post ties its Berlin incident work to that advisory. heise reads this as confirmation. Neither
+    the advisory nor the State of Berlin names Berlin or TerminalFix together, so the link rests on inference.
+- id: J2
+  statement: TerminalFix access is very likely monetised through ransomware and data extortion by the Vice Spider / Rhysida
+    ecosystem rather than through infostealers.
+  confidence: moderate
+  likelihood: very likely
+  based_on: [C3, C23, C39, C40, C42]
+  rationale: The chain ends in network access, not credential theft from one host; the BSI reports attempted ransomware
+    and double extortion and ties LoremIpsumLoader in the campaign to the Rhysida group; BlueVoyant independently reports
+    the same group moving to Terminal-based ClickFix lures. Microsoft itself did not observe follow-up activity.
+- id: J3
+  statement: The published hashes and domains will very likely age quickly; detections built on the behaviour - LockScreenContentServer.exe
+    outside SystemApps, pythonw.exe running a tunnel script, a single long-lived WebSocket over 443 - are the more durable
+    control.
+  confidence: moderate
+  likelihood: very likely
+  based_on: [C10, C17, C18, C26, C42]
+  rationale: The operators already switched delivery once after a disruption (signed installers to ClickFix), use a failover
+    domain for payloads and rely on legitimate signed binaries and runtimes whose abuse is visible in behaviour, not in hashes.
+- id: J4
+  statement: German public-sector victims are likely the result of opportunistic, financially motivated targeting rather
+    than a campaign aimed specifically at Germany, so European organisations in all sectors face comparable exposure.
+  confidence: moderate
+  likelihood: likely
+  based_on: [C1, C8, C36, C41]
+  rationale: Microsoft sees victims across multiple industries, the lure script sat on several hundred websites, the BSI
+    calls the actors opportunistic and financially motivated, and the Rhysida leak site shows no significant German focus.
+- id: J5
+  statement: The Terminal-versus-Run distinction is of limited defensive value; controls and awareness must cover every
+    paste-and-run path, not only the Run dialog.
+  confidence: moderate
+  likelihood: likely
+  based_on: [C2, C4, C42, C48]
+  rationale: Microsoft presents Terminal as the differentiator, while Proofpoint points to Terminal lures since 2024 and
+    BlueVoyant sees another group use the same Terminal paste flow; blocking Win+R alone would leave the TerminalFix path open.
+gaps:
+- No primary source explicitly names TerminalFix as the initial access vector in Berlin. The BSI advisory speaks of "a state
+  institution"; the State of Berlin names neither the vector nor Rhysida; the link rests on the BSI Mastodon post and heise's
+  reading of it (see J1).
+- The advisory title speaks of German institutions in the plural; which other institutions were affected is not public.
+- The BlueVoyant analyses on Lorem Ipsum / Rapid Brigantine (referenced by the BSI) blocked automated retrieval (HTTP 403);
+  that link relies on Dark Reading's summary and was not checked against the original.
+- No public IOC overlap links Microsoft's TerminalFix samples to LoremIpsumLoader or to the Berlin intrusion; whether the
+  Berlin chain used the same files and infrastructure is unknown.
+- Whether ransomware was actually deployed or executed in Berlin has not been stated by any source; the BSI speaks of attempts
+  in reports it received.
+- How the Berlin victim reached the compromised website (phishing e-mail, search, watering hole) is not documented by an official
+  source.
+- Number of victims and of compromised websites currently serving the lure is unknown; the BSI only refers to several hundred
+  websites in historical data.
+- Microsoft is inconsistent on the locale coverage of the reconnaissance script (English/Spanish vs. English/Spanish/German, C25).
+- abuse.ch (ThreatFox, MalwareBazaar) had no entries for the tag TerminalFix at collection time.
+- The Register article (S9) could not be extracted and was not used.
